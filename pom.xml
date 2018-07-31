@@ -1,0 +1,99 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>cn.luozhuowei</groupId>
+  <artifactId>oss_demo</artifactId>
+  <version>1.0</version>
+  <packaging>jar</packaging>
+
+  <name>oss_demo</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <!-- aliyun oss -->
+    <dependency>
+		<groupId>com.aliyun.oss</groupId>
+		<artifactId>aliyun-sdk-oss</artifactId>
+		<version>2.5.0</version>
+	</dependency>
+	<dependency>
+		<groupId>com.aliyun</groupId>
+		<artifactId>aliyun-java-sdk-core</artifactId>
+		<version>2.1.7</version>
+	</dependency>
+	<dependency>
+		<groupId>com.aliyun</groupId>
+		<artifactId>aliyun-java-sdk-sts</artifactId>
+		<version>2.1.6</version>
+	</dependency>
+	<!-- fastjson -->
+	<dependency>
+	  <groupId>com.alibaba</groupId>
+	  <artifactId>fastjson</artifactId>
+	  <version>1.2.28</version>
+	</dependency>
+	<!-- slf4j -->
+	<dependency>
+	  <groupId>org.slf4j</groupId>
+	  <artifactId>jcl-over-slf4j</artifactId>
+	  <version>1.7.25</version>
+	</dependency>
+  </dependencies>
+  
+  <profiles>
+  	<profile>
+        <id>test</id>
+        <properties>
+            <!-- 阿里云oss配置 -->
+        	<pom.accessKeyId>xxx</pom.accessKeyId>
+			<pom.accessKeySecret>xxx</pom.accessKeySecret>
+			<!-- oss子账户授权 -->
+			<pom.roleArn>acs:ram::xxx:role/aliyunosstokengeneratorrole</pom.roleArn>
+			<pom.roleSessionName>xxx</pom.roleSessionName>
+			<pom.ossHttp>https://</pom.ossHttp>
+			<pom.endpoint>oss-cn-beijing.aliyuncs.com</pom.endpoint>
+        </properties>
+        <activation>
+        	<!-- 默认生效的配置组 -->
+        	<activeByDefault>true</activeByDefault>
+        </activation>
+    </profile>
+  </profiles>
+  
+  <build>
+	<resources>
+        <resource>
+            <directory>src/main/resources</directory>
+            <filtering>true</filtering>
+        </resource>
+    </resources>
+	<plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-resources-plugin</artifactId>
+			<version>3.0.2</version>
+		</plugin>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-install-plugin</artifactId>
+			<version>2.5.1</version>
+		</plugin>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>2.3.2</version>
+			<configuration>
+				<source>1.8</source>
+				<target>1.8</target>
+				<skip>true</skip>
+				<encoding>UTF-8</encoding>
+			</configuration>
+		</plugin>
+	</plugins>
+  </build>
+</project>
